@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <!-- 高德地图 JS API -->
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=6085479a3260747c622b2e53fa65239a"></script>
 </head>
 <body>
 
@@ -22,6 +24,7 @@
       <nav class="nav-links">
         <a href="#overview" class="active">概览 Overview</a>
         <a href="#flights">双人航班 Flights</a>
+        <a href="#map">高德地图 Map</a>
         <a href="#weather">实时天气 Weather</a>
         <a href="#itinerary">每日行程 Itinerary</a>
         <a href="#food">大众点评美食 Food</a>
@@ -240,7 +243,26 @@
       </div>
     </section>
 
-    <!-- NEW MODULE 1: Real-time Weather Section -->
+    <!-- NEW MODULE: Amap Section -->
+    <section id="map" class="section-block">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-subtitle">AutoNavi Interactive Route Map</span>
+          <h2 class="section-title">🗺️ 高德地图全行程路线与导航</h2>
+        </div>
+      </div>
+
+      <div class="map-container-box">
+        <div class="amap-wrapper">
+          <div id="amap-render-container"></div>
+        </div>
+        <div id="map-points-sidebar" class="map-points-sidebar">
+          <!-- Dynamic sidebar point cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Real-time Weather Section -->
     <section id="weather" class="section-block">
       <div class="section-header">
         <div class="section-title-group">
@@ -671,7 +693,7 @@
       </div>
     </section>
 
-    <!-- NEW MODULE 2: Dianping Gourmet Section -->
+    <!-- Dianping Gourmet Section -->
     <section id="food" class="section-block">
       <div class="section-header">
         <div class="section-title-group">

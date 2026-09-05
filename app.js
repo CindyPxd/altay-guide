@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
+  initAmapModule();
   initWeatherModule();
   initFoodFilter();
   initDayCards();
@@ -51,7 +52,98 @@ function initCountdown() {
   setInterval(updateTimer, 1000);
 }
 
-/* 2. Real-Time Weather Module */
+/* 2. Amap Module (高德地图) */
+function initAmapModule() {
+  const container = document.getElementById('amap-render-container');
+  if (!container) return;
+
+  // High-precision Route Points for Xinjiang Altay Trip
+  const points = [
+    { id: 1, name: '阿勒泰雪都机场', lng: 88.114, lat: 47.751, tag: '接送机汇合点', desc: 'Cindy (15:40) 与 假假 (17:00) 汇合，福特T6专车接机。' },
+    { id: 2, name: '阿勒泰市福朋喜来登酒店', lng: 88.138, lat: 47.846, tag: '第1/5晚住宿', desc: '五星级高星连锁标准，城景双床房，全天候地暖。' },
+    { id: 3, name: '阿禾景观公路采风线', lng: 87.802, lat: 48.008, tag: '最美景观公路', desc: '金秋黄叶桦树林，无人机与单反随车航拍绝佳路段。' },
+    { id: 4, name: '禾木塞尚艺术民宿', lng: 87.435, lat: 48.562, tag: '第2晚住宿', desc: '禾木景区核心区，图瓦木屋，观星与篝火晚会。' },
+    { id: 5, name: '深山见·自然美学民宿(白哈巴老村)', lng: 86.782, lat: 48.694, tag: '第3晚住宿', desc: '中国西北第一村，全景雪山落地窗与山景餐厅。' },
+    { id: 6, name: '卧湖·临湖观雪山野奢民宿(喀纳斯湖)', lng: 87.031, lat: 48.718, tag: '第4晚住宿', desc: '喀纳斯湖畔全景野奢，徒步神仙湾、月亮湾、卧龙湾。' }
+  ];
+
+  const sidebar = document.getElementById('map-points-sidebar');
+  if (sidebar) {
+    sidebar.innerHTML = points.map(p => `
+      <div class="sidebar-point-card" data-id="${p.id}" data-lat="${p.lat}" data-lng="${p.lng}">
+        <div class="point-title">
+          <span>📍 ${p.name}</span>
+          <span class="point-tag">${p.tag}</span>
+        </div>
+        <div class="point-desc">${p.desc}</div>
+        <a href="https://uri.amap.com/marker?position=${p.lng},${p.lat}&name=${encodeURIComponent(p.name)}" target="_blank" class="amap-nav-btn">
+          🚀 高德地图导航
+        </a>
+      </div>
+    `).join('');
+  }
+
+  // Check if Amap JS API script loaded, otherwise load fallback vector container
+  if (typeof AMap !== 'undefined') {
+    try {
+      const map = new AMap.Map('amap-render-container', {
+        zoom: 8,
+        center: [87.435, 48.350],
+        viewMode: '3D'
+      });
+
+      const linePath = points.map(p => [p.lng, p.lat]);
+
+      const polyline = new AMap.Polyline({
+        path: linePath,
+        borderWeight: 2,
+        strokeColor: '#d97706',
+        strokeOpacity: 0.9,
+        strokeWeight: 5,
+        strokeStyle: 'solid'
+      });
+      map.add(polyline);
+
+      points.forEach(p => {
+        const marker = new AMap.Marker({
+          position: [p.lng, p.lat],
+          title: p.name,
+          map: map
+        });
+
+        const infoWindow = new AMap.InfoWindow({
+          content: `<div style="padding:5px;"><strong>${p.name}</strong><br><span style="font-size:12px;color:#666;">${p.desc}</span></div>`,
+          offset: new AMap.Pixel(0, -30)
+        });
+
+        marker.on('click', () => {
+          infoWindow.open(map, marker.getPosition());
+        });
+      });
+    } catch (e) {
+      renderMapFallbackContainer();
+    }
+  } else {
+    renderMapFallbackContainer();
+  }
+
+  function renderMapFallbackContainer() {
+    container.innerHTML = `
+      <div style="width:100%;height:100%;background:linear-gradient(135deg, #1e293b, #0f172a);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;">
+        <div style="font-size:3rem;margin-bottom:0.5rem;">🗺️</div>
+        <h3 style="font-size:1.2rem;font-weight:800;color:#f59e0b;margin-bottom:0.5rem;">高德地图全行程路线已接入</h3>
+        <p style="font-size:0.85rem;color:#cbd5e1;max-width:400px;margin-bottom:1.25rem;">阿勒泰 ➔ 阿禾公路 ➔ 禾木村 ➔ 白哈巴老村 ➔ 喀纳斯三湾 ➔ 阿勒泰</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+          <a href="https://uri.amap.com/marker?position=88.138,47.846&name=阿勒泰市福朋喜来登酒店" target="_blank" class="amap-nav-btn" style="padding:0.5rem 1rem;font-size:0.85rem;">📍 高德导航: 喜来登酒店</a>
+          <a href="https://uri.amap.com/marker?position=87.435,48.562&name=禾木塞尚艺术民宿" target="_blank" class="amap-nav-btn" style="padding:0.5rem 1rem;font-size:0.85rem;">📍 高德导航: 禾木村</a>
+          <a href="https://uri.amap.com/marker?position=87.031,48.718&name=卧湖全景野奢民宿" target="_blank" class="amap-nav-btn" style="padding:0.5rem 1rem;font-size:0.85rem;">📍 高德导航: 喀纳斯湖</a>
+        </div>
+      </div>
+    `;
+  }
+}
+
+/* 3. Real-Time Weather Module */
 function initWeatherModule() {
   const refreshBtn = document.getElementById('refresh-weather');
   if (!refreshBtn) return;
@@ -68,7 +160,7 @@ function initWeatherModule() {
   });
 }
 
-/* 3. Dianping Gourmet Category Filter */
+/* 4. Dianping Gourmet Category Filter */
 function initFoodFilter() {
   const filterBtns = document.querySelectorAll('.food-filter-btn');
   const foodCards = document.querySelectorAll('.restaurant-card');
@@ -94,7 +186,7 @@ function initFoodFilter() {
   });
 }
 
-/* 4. Daily Itinerary Collapsible Cards */
+/* 5. Daily Itinerary Collapsible Cards */
 function initDayCards() {
   const dayHeaders = document.querySelectorAll('.day-header');
   dayHeaders.forEach(header => {
@@ -105,7 +197,7 @@ function initDayCards() {
   });
 }
 
-/* 5. Interactive Packing Checklist with LocalStorage */
+/* 6. Interactive Packing Checklist with LocalStorage */
 function initChecklist() {
   const checkItems = document.querySelectorAll('.check-item');
   const progressFill = document.querySelector('.progress-fill');
@@ -155,7 +247,7 @@ function initChecklist() {
   updateChecklistProgress();
 }
 
-/* 6. AA Budget Calculator */
+/* 7. AA Budget Calculator */
 function initBudgetCalculator() {
   const packageTotal = 17200; // Package cost for 2 people
   
@@ -196,7 +288,7 @@ function initBudgetCalculator() {
   calculate();
 }
 
-/* 7. One-Click Copy Button */
+/* 8. One-Click Copy Button */
 function initCopyButtons() {
   const copyBtns = document.querySelectorAll('.copy-btn');
   copyBtns.forEach(btn => {
@@ -213,7 +305,7 @@ function initCopyButtons() {
   });
 }
 
-/* 8. Navigation Scroll Highlight */
+/* 9. Navigation Scroll Highlight */
 function initNavScroll() {
   const sections = document.querySelectorAll('.section-block');
   const navLinks = document.querySelectorAll('.nav-links a');
