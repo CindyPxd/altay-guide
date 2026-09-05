@@ -61,15 +61,17 @@
 html {
   scroll-behavior: smooth;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  background-color: #fef9c3;
-  background-image: repeating-linear-gradient(
-    -45deg,
-    #ffffff,
-    #ffffff 22px,
-    #fef08a 22px,
-    #fef08a 44px
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fdf7e7,
+    #fdf7e7 35px,
+    #fcedd2 35px,
+    #fcedd2 70px
   );
+  background-repeat: repeat;
   background-attachment: fixed;
+  background-size: 109px auto, 70px 100%;
   color: var(--text-primary);
   line-height: 1.6;
 }
