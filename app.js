@@ -273,22 +273,76 @@ function initChecklist() {
   updateChecklistProgress();
 }
 
-/* 8. AA Budget Calculator */
+/* 8. AA Budget Calculator (支持新增与双人累计) */
 function initBudgetCalculator() {
   const packageTotal = 17200; // Package cost for 2 people
+  const perPersonPackage = packageTotal / 2;
   
   const flightA = document.getElementById('flight-duan');
   const flightB = document.getElementById('flight-pan');
   const extraCostInput = document.getElementById('extra-expenses');
 
+  const addBtn = document.getElementById('add-custom-item');
+  const itemsContainer = document.getElementById('custom-items-list');
+
   const sumPackageEl = document.getElementById('sum-package');
-  const sumPerPackageEl = document.getElementById('sum-per-package');
   const sumFlightsEl = document.getElementById('sum-flights');
   const sumExtraEl = document.getElementById('sum-extra');
+  const sumAddedItemsEl = document.getElementById('sum-added-items');
+  
+  const sumDuanTotalEl = document.getElementById('sum-duan-total');
+  const sumPanTotalEl = document.getElementById('sum-pan-total');
   const totalPriceEl = document.getElementById('total-price-val');
-  const perPersonPriceEl = document.getElementById('per-person-val');
 
   if (!flightA) return;
+
+  // Default initial items
+  const initialItems = [
+    { name: '额尔齐斯河冷水鱼晚宴', amount: 380, split: 'aa' },
+    { name: '观鱼台登顶区间车', amount: 120, split: 'aa' }
+  ];
+
+  function createItemRow(name = '', amount = 0, split = 'aa') {
+    const row = document.createElement('div');
+    row.className = 'custom-item-row';
+    row.innerHTML = `
+      <input type="text" class="custom-input item-name" placeholder="项目名称 (如: 晚餐/门票)" value="${name}">
+      <input type="number" class="custom-input item-amount" placeholder="金额" value="${amount || ''}">
+      <select class="custom-select item-split">
+        <option value="aa" ${split === 'aa' ? 'selected' : ''}>50/50 AA</option>
+        <option value="duan" ${split === 'duan' ? 'selected' : ''}>假假 个人</option>
+        <option value="pan" ${split === 'pan' ? 'selected' : ''}>Cindy 个人</option>
+      </select>
+      <button type="button" class="delete-item-btn" title="删除项目">🗑️</button>
+    `;
+
+    row.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('input', calculate);
+      el.addEventListener('change', calculate);
+    });
+
+    row.querySelector('.delete-item-btn').addEventListener('click', () => {
+      row.remove();
+      calculate();
+    });
+
+    return row;
+  }
+
+  if (itemsContainer && !itemsContainer.children.length) {
+    initialItems.forEach(item => {
+      itemsContainer.appendChild(createItemRow(item.name, item.amount, item.split));
+    });
+  }
+
+  if (addBtn && itemsContainer) {
+    addBtn.addEventListener('click', () => {
+      const newRow = createItemRow();
+      itemsContainer.appendChild(newRow);
+      newRow.querySelector('.item-name').focus();
+      calculate();
+    });
+  }
 
   function calculate() {
     const fA = parseFloat(flightA.value) || 0;
@@ -296,15 +350,42 @@ function initBudgetCalculator() {
     const extra = parseFloat(extraCostInput.value) || 0;
 
     const totalFlights = fA + fB;
-    const grandTotal = packageTotal + totalFlights + extra;
-    const perPersonTotal = grandTotal / 2;
+    const extraPerPerson = extra / 2;
+
+    let addedItemsTotal = 0;
+    let duanAddedShare = 0;
+    let panAddedShare = 0;
+
+    if (itemsContainer) {
+      const rows = itemsContainer.querySelectorAll('.custom-item-row');
+      rows.forEach(row => {
+        const amt = parseFloat(row.querySelector('.item-amount').value) || 0;
+        const split = row.querySelector('.item-split').value;
+
+        addedItemsTotal += amt;
+        if (split === 'aa') {
+          duanAddedShare += amt / 2;
+          panAddedShare += amt / 2;
+        } else if (split === 'duan') {
+          duanAddedShare += amt;
+        } else if (split === 'pan') {
+          panAddedShare += amt;
+        }
+      });
+    }
+
+    const duanTotal = perPersonPackage + fA + extraPerPerson + duanAddedShare;
+    const panTotal = perPersonPackage + fB + extraPerPerson + panAddedShare;
+    const grandTotal = duanTotal + panTotal;
 
     if (sumPackageEl) sumPackageEl.textContent = `¥${packageTotal.toLocaleString()}`;
-    if (sumPerPackageEl) sumPerPackageEl.textContent = `¥${(packageTotal / 2).toLocaleString()}`;
     if (sumFlightsEl) sumFlightsEl.textContent = `¥${totalFlights.toLocaleString()} (假假:¥${fA} / Cindy:¥${fB})`;
     if (sumExtraEl) sumExtraEl.textContent = `¥${extra.toLocaleString()}`;
-    if (totalPriceEl) totalPriceEl.textContent = `¥${grandTotal.toLocaleString()}`;
-    if (perPersonPriceEl) perPersonPriceEl.textContent = `¥${Math.round(perPersonTotal).toLocaleString()}`;
+    if (sumAddedItemsEl) sumAddedItemsEl.textContent = `¥${addedItemsTotal.toLocaleString()}`;
+
+    if (sumDuanTotalEl) sumDuanTotalEl.textContent = `¥${Math.round(duanTotal).toLocaleString()}`;
+    if (sumPanTotalEl) sumPanTotalEl.textContent = `¥${Math.round(panTotal).toLocaleString()}`;
+    if (totalPriceEl) totalPriceEl.textContent = `¥${Math.round(grandTotal).toLocaleString()}`;
   }
 
   [flightA, flightB, extraCostInput].forEach(input => {

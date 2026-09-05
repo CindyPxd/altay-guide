@@ -108,7 +108,7 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   list-style: none;
 }
 
@@ -120,12 +120,24 @@ body {
   padding: 0.35rem 0.65rem;
   border-radius: var(--radius-full);
   transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--primary-gold);
   background-color: var(--primary-gold-light);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
 }
 
 .header-actions {
@@ -155,10 +167,7 @@ body {
   color: #fff;
 }
 
-/* ==========================================================================
-   NEW FEATURE: VERTICAL MOBILE PORTRAIT PREVIEW MODE (📱 竖版预览)
-   ========================================================================== */
-
+/* Vertical Mobile Portrait Mode Preview */
 body.portrait-mode-active {
   background-color: #1e293b;
   padding: 2rem 0;
@@ -173,9 +182,33 @@ body.portrait-mode-active .site-header {
 
 body.portrait-mode-active .header-container {
   padding: 0.75rem 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
+body.portrait-mode-active .logo-group {
+  order: 1;
+}
+
+body.portrait-mode-active .header-actions {
+  order: 2;
+}
+
+/* Mobile Scrollable Horizontal Navigation for Vertical Mode */
 body.portrait-mode-active .nav-links {
+  order: 3;
+  flex-basis: 100%;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--border-color);
+  -webkit-overflow-scrolling: touch;
+}
+
+body.portrait-mode-active .nav-links::-webkit-scrollbar {
   display: none;
 }
 
@@ -1277,7 +1310,10 @@ body.portrait-mode-active .portrait-exit-bar {
   color: var(--text-light);
 }
 
-/* Budget Calculator Section */
+/* ==========================================================================
+   ENHANCED DYNAMIC AA BUDGET CALCULATOR (支持新增与累计)
+   ========================================================================== */
+
 .budget-box {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -1329,6 +1365,103 @@ body.portrait-mode-active .portrait-exit-bar {
   border-color: var(--primary-gold);
 }
 
+/* Dynamic Add Item List */
+.dynamic-items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.dynamic-items-header h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-gold-dark);
+}
+
+.add-item-btn {
+  background: var(--primary-gold-light);
+  color: var(--primary-gold-dark);
+  border: 1px solid var(--primary-gold);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.add-item-btn:hover {
+  background: var(--primary-gold);
+  color: #fff;
+}
+
+.custom-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.custom-item-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.2fr 36px;
+  gap: 0.5rem;
+  align-items: center;
+  background: var(--bg-card-subtle);
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+@media (max-width: 600px) {
+  .custom-item-row {
+    grid-template-columns: 1fr 1fr 36px;
+  }
+  .custom-item-row .item-name {
+    grid-column: 1 / -1;
+  }
+}
+
+body.portrait-mode-active .custom-item-row {
+  grid-template-columns: 1fr 1fr 36px;
+}
+
+body.portrait-mode-active .custom-item-row .item-name {
+  grid-column: 1 / -1;
+}
+
+.custom-select {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.delete-item-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  border-radius: var(--radius-sm);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+}
+
+.delete-item-btn:hover {
+  background: #dc2626;
+  color: #fff;
+}
+
 .budget-summary {
   background: var(--bg-card-subtle);
   border: 1px solid var(--border-color);
@@ -1358,12 +1491,22 @@ body.portrait-mode-active .portrait-exit-bar {
   padding-top: 0.85rem;
   margin-top: 0.85rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.total-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
 }
 
 .total-price {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--primary-gold);
 }
@@ -1442,6 +1585,15 @@ body.portrait-mode-active .portrait-exit-bar {
     height: 320px;
   }
   .nav-links {
+    display: flex;
+    overflow-x: auto;
+    max-width: 100%;
+    padding-bottom: 0.25rem;
+  }
+  .nav-links::-webkit-scrollbar {
     display: none;
+  }
+  .mobile-menu-btn {
+    display: block;
   }
 }
