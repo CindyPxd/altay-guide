@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
   initPortraitToggle();
+  initMobileMenu();
   initAmapModule();
   initWeatherModule();
   initFoodFilter();
@@ -76,6 +77,33 @@ function initPortraitToggle() {
       showToast('🖥️ 已恢复宽屏视图');
     }
   }
+}
+
+/* Mobile Menu Toggle & Dropdown Handler (☰ 菜单栏) */
+function initMobileMenu() {
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const siteNav = document.getElementById('site-nav');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  if (!menuToggle || !siteNav) return;
+
+  menuToggle.addEventListener('click', () => {
+    const isExpanded = siteNav.classList.toggle('expanded');
+    menuToggle.classList.toggle('active', isExpanded);
+    menuToggle.innerHTML = isExpanded 
+      ? '<span>✖</span> <span class="btn-text">收起</span>' 
+      : '<span>☰</span> <span class="btn-text">菜单栏</span>';
+  });
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (siteNav.classList.contains('expanded')) {
+        siteNav.classList.remove('expanded');
+        menuToggle.classList.remove('active');
+        menuToggle.innerHTML = '<span>☰</span> <span class="btn-text">菜单栏</span>';
+      }
+    });
+  });
 }
 
 /* 3. Amap Module (高德地图) */
