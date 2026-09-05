@@ -129,7 +129,7 @@ body::after {
   transition: all var(--transition-normal);
 }
 
-/* Card Watermark & Window Pattern System: Every card uses the window background pattern + bottom-right watermark */
+/* Card Watermark System: Complete Logo Watermark Aligned to Bottom-Right Corner of EVERY Card */
 .hero-banner,
 .countdown-card,
 .flight-card,
@@ -142,18 +142,6 @@ body::after {
 .contract-card {
   position: relative;
   overflow: hidden;
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
-  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.08);
 }
 
 .hero-banner::after,
@@ -745,17 +733,8 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .flight-card {
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 1.75rem;
   box-shadow: var(--shadow-sm);
@@ -905,17 +884,8 @@ body.portrait-mode-active .portrait-exit-bar {
 
 /* Amap Section */
 .map-container-box {
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -1015,17 +985,8 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .weather-card {
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 1.25rem;
   box-shadow: var(--shadow-sm);
@@ -1167,17 +1128,8 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .restaurant-card {
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -1477,17 +1429,8 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .hotel-card {
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -1569,17 +1512,8 @@ body.portrait-mode-active .portrait-exit-bar {
 
 /* Checklist Section */
 .checklist-container {
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -1657,17 +1591,8 @@ body.portrait-mode-active .portrait-exit-bar {
    ========================================================================== */
 
 .budget-box {
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -1864,17 +1789,8 @@ body.portrait-mode-active .custom-item-row .item-name {
 
 /* Contract & Emergency Section */
 .contract-card {
-  background-color: #fcedd2;
-  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
-    90deg,
-    #fffdf7,
-    #fffdf7 35px,
-    #fef3c7 35px,
-    #fef3c7 70px
-  );
-  background-repeat: repeat;
-  background-size: 109px auto, 70px 100%;
-  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 1.75rem;
   box-shadow: var(--shadow-sm);
