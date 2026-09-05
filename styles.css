@@ -1719,10 +1719,22 @@ body.portrait-mode-active .portrait-exit-bar {
   gap: 0.75rem;
 }
 
+.input-with-status {
+  display: grid;
+  grid-template-columns: 1fr 115px;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.status-select {
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
 .custom-item-row {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1.2fr 36px;
-  gap: 0.5rem;
+  grid-template-columns: 1.4fr 0.9fr 1.1fr 1.1fr 34px;
+  gap: 0.4rem;
   align-items: center;
   background: var(--bg-card-subtle);
   padding: 0.5rem;
@@ -1731,8 +1743,11 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 @media (max-width: 600px) {
+  .input-with-status {
+    grid-template-columns: 1fr 105px;
+  }
   .custom-item-row {
-    grid-template-columns: 1fr 1fr 36px;
+    grid-template-columns: 1fr 1fr 34px;
   }
   .custom-item-row .item-name {
     grid-column: 1 / -1;
@@ -1740,7 +1755,7 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 body.portrait-mode-active .custom-item-row {
-  grid-template-columns: 1fr 1fr 36px;
+  grid-template-columns: 1fr 1fr 34px;
 }
 
 body.portrait-mode-active .custom-item-row .item-name {
@@ -1751,7 +1766,7 @@ body.portrait-mode-active .custom-item-row .item-name {
   background: var(--bg-card-subtle);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: 0.6rem 0.5rem;
+  padding: 0.6rem 0.4rem;
   font-size: 0.85rem;
   color: var(--text-primary);
   cursor: pointer;
@@ -1781,7 +1796,7 @@ body.portrait-mode-active .custom-item-row .item-name {
   background: var(--bg-card-subtle);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1790,40 +1805,124 @@ body.portrait-mode-active .custom-item-row .item-name {
 .summary-title {
   font-size: 1rem;
   font-weight: 800;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .summary-row {
   display: flex;
   justify-content: space-between;
   font-size: 0.85rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.35rem;
   color: var(--text-secondary);
+}
+
+/* Status Summary Blocks */
+.status-summary-block {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.status-summary-block.settled-block {
+  border-left: 4px solid var(--primary-green);
+}
+
+.status-summary-block.pending-block {
+  border-left: 4px solid var(--primary-gold);
+}
+
+.block-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.block-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin-top: 0.35rem;
+  padding-top: 0.35rem;
+  border-top: 1px dashed var(--border-color);
+  color: var(--text-primary);
+}
+
+.amount-val {
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .summary-total {
   border-top: 2px dashed var(--border-color);
-  padding-top: 0.85rem;
-  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
+}
+
+.grand-total-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--primary-gold-dark);
+  margin-bottom: 0.2rem;
 }
 
 .total-split-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 0.5rem;
   background: #fff;
   border: 1px solid var(--border-color);
-  padding: 0.75rem;
+  padding: 0.65rem;
   border-radius: var(--radius-sm);
 }
 
+.person-card-header {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.person-detail-badge {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
 .total-price {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--primary-gold);
+}
+
+.grand-overall-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1.5px solid var(--border-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.grand-overall-row span:last-child {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-gold-dark);
 }
 
 /* Contract & Emergency Section */

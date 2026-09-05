@@ -282,34 +282,44 @@ function initChecklist() {
   updateChecklistProgress();
 }
 
-/* 8. AA Budget Calculator (真实费用结算) */
+/* 8. AA Budget Calculator (真实费用结算: 已结清/待结清 & 每个人累计总额) */
 function initBudgetCalculator() {
   const packageTotal = 17200; // Package cost for 2 people
   const perPersonPackage = packageTotal / 2;
   
+  const packageStatusEl = document.getElementById('package-status');
   const flightA = document.getElementById('flight-duan');
+  const flightAStatusEl = document.getElementById('flight-duan-status');
   const flightB = document.getElementById('flight-pan');
+  const flightBStatusEl = document.getElementById('flight-pan-status');
 
   const addBtn = document.getElementById('add-custom-item');
   const itemsContainer = document.getElementById('custom-items-list');
 
-  const sumPackageEl = document.getElementById('sum-package');
-  const sumFlightsEl = document.getElementById('sum-flights');
-  const sumAddedItemsEl = document.getElementById('sum-added-items');
-  
+  // Summary elements
+  const settledDuanEl = document.getElementById('settled-duan-val');
+  const settledPanEl = document.getElementById('settled-pan-val');
+  const settledTotalEl = document.getElementById('settled-total-val');
+
+  const pendingDuanEl = document.getElementById('pending-duan-val');
+  const pendingPanEl = document.getElementById('pending-pan-val');
+  const pendingTotalEl = document.getElementById('pending-total-val');
+
   const sumDuanTotalEl = document.getElementById('sum-duan-total');
   const sumPanTotalEl = document.getElementById('sum-pan-total');
+  const duanBreakdownEl = document.getElementById('duan-breakdown-text');
+  const panBreakdownEl = document.getElementById('pan-breakdown-text');
   const totalPriceEl = document.getElementById('total-price-val');
 
   if (!flightA) return;
 
   // Default initial actual items
   const initialItems = [
-    { name: '额尔齐斯河冷水鱼晚宴', amount: 380, split: 'aa' },
-    { name: '观鱼台登顶区间车', amount: 120, split: 'aa' }
+    { name: '额尔齐斯河冷水鱼晚宴', amount: 380, split: 'aa', status: 'pending' },
+    { name: '观鱼台登顶区间车', amount: 120, split: 'aa', status: 'pending' }
   ];
 
-  function createItemRow(name = '', amount = 0, split = 'aa') {
+  function createItemRow(name = '', amount = 0, split = 'aa', status = 'pending') {
     const row = document.createElement('div');
     row.className = 'custom-item-row';
     row.innerHTML = `
@@ -319,6 +329,10 @@ function initBudgetCalculator() {
         <option value="aa" ${split === 'aa' ? 'selected' : ''}>50/50 AA</option>
         <option value="duan" ${split === 'duan' ? 'selected' : ''}>假假 个人</option>
         <option value="pan" ${split === 'pan' ? 'selected' : ''}>Cindy 个人</option>
+      </select>
+      <select class="custom-select item-status status-select">
+        <option value="pending" ${status === 'pending' ? 'selected' : ''}>⏳ 待结清</option>
+        <option value="settled" ${status === 'settled' ? 'selected' : ''}>✅ 已结清</option>
       </select>
       <button type="button" class="delete-item-btn" title="删除项目">🗑️</button>
     `;
@@ -338,7 +352,7 @@ function initBudgetCalculator() {
 
   if (itemsContainer && !itemsContainer.children.length) {
     initialItems.forEach(item => {
-      itemsContainer.appendChild(createItemRow(item.name, item.amount, item.split));
+      itemsContainer.appendChild(createItemRow(item.name, item.amount, item.split, item.status));
     });
   }
 
@@ -355,45 +369,86 @@ function initBudgetCalculator() {
     const fA = parseFloat(flightA.value) || 0;
     const fB = parseFloat(flightB.value) || 0;
 
-    const totalFlights = fA + fB;
+    const isPackageSettled = packageStatusEl ? packageStatusEl.value === 'settled' : true;
+    const isFlightASettled = flightAStatusEl ? flightAStatusEl.value === 'settled' : true;
+    const isFlightBSettled = flightBStatusEl ? flightBStatusEl.value === 'settled' : true;
 
-    let addedItemsTotal = 0;
-    let duanAddedShare = 0;
-    let panAddedShare = 0;
+    // Subtotal tracking
+    let duanSettled = 0;
+    let duanPending = 0;
+    let panSettled = 0;
+    let panPending = 0;
 
+    // Package cost calculation
+    if (isPackageSettled) {
+      duanSettled += perPersonPackage;
+      panSettled += perPersonPackage;
+    } else {
+      duanPending += perPersonPackage;
+      panPending += perPersonPackage;
+    }
+
+    // Flights calculation
+    if (isFlightASettled) duanSettled += fA; else duanPending += fA;
+    if (isFlightBSettled) panSettled += fB; else panPending += fB;
+
+    // Custom items calculation
     if (itemsContainer) {
       const rows = itemsContainer.querySelectorAll('.custom-item-row');
       rows.forEach(row => {
         const amt = parseFloat(row.querySelector('.item-amount').value) || 0;
         const split = row.querySelector('.item-split').value;
+        const st = row.querySelector('.item-status').value;
 
-        addedItemsTotal += amt;
+        let duanShare = 0;
+        let panShare = 0;
+
         if (split === 'aa') {
-          duanAddedShare += amt / 2;
-          panAddedShare += amt / 2;
+          duanShare = amt / 2;
+          panShare = amt / 2;
         } else if (split === 'duan') {
-          duanAddedShare += amt;
+          duanShare = amt;
         } else if (split === 'pan') {
-          panAddedShare += amt;
+          panShare = amt;
+        }
+
+        if (st === 'settled') {
+          duanSettled += duanShare;
+          panSettled += panShare;
+        } else {
+          duanPending += duanShare;
+          panPending += panShare;
         }
       });
     }
 
-    const duanTotal = perPersonPackage + fA + duanAddedShare;
-    const panTotal = perPersonPackage + fB + panAddedShare;
+    const duanTotal = duanSettled + duanPending;
+    const panTotal = panSettled + panPending;
     const grandTotal = duanTotal + panTotal;
 
-    if (sumPackageEl) sumPackageEl.textContent = `¥${packageTotal.toLocaleString()}`;
-    if (sumFlightsEl) sumFlightsEl.textContent = `¥${totalFlights.toLocaleString()} (假假:¥${fA} / Cindy:¥${fB})`;
-    if (sumAddedItemsEl) sumAddedItemsEl.textContent = `¥${addedItemsTotal.toLocaleString()}`;
+    // Update Summary DOM
+    if (settledDuanEl) settledDuanEl.textContent = `¥${Math.round(duanSettled).toLocaleString()}`;
+    if (settledPanEl) settledPanEl.textContent = `¥${Math.round(panSettled).toLocaleString()}`;
+    if (settledTotalEl) settledTotalEl.textContent = `¥${Math.round(duanSettled + panSettled).toLocaleString()}`;
+
+    if (pendingDuanEl) pendingDuanEl.textContent = `¥${Math.round(duanPending).toLocaleString()}`;
+    if (pendingPanEl) pendingPanEl.textContent = `¥${Math.round(panPending).toLocaleString()}`;
+    if (pendingTotalEl) pendingTotalEl.textContent = `¥${Math.round(duanPending + panPending).toLocaleString()}`;
 
     if (sumDuanTotalEl) sumDuanTotalEl.textContent = `¥${Math.round(duanTotal).toLocaleString()}`;
     if (sumPanTotalEl) sumPanTotalEl.textContent = `¥${Math.round(panTotal).toLocaleString()}`;
+
+    if (duanBreakdownEl) duanBreakdownEl.textContent = `已结 ¥${Math.round(duanSettled).toLocaleString()} + 待结 ¥${Math.round(duanPending).toLocaleString()}`;
+    if (panBreakdownEl) panBreakdownEl.textContent = `已结 ¥${Math.round(panSettled).toLocaleString()} + 待结 ¥${Math.round(panPending).toLocaleString()}`;
+
     if (totalPriceEl) totalPriceEl.textContent = `¥${Math.round(grandTotal).toLocaleString()}`;
   }
 
-  [flightA, flightB].forEach(input => {
-    if (input) input.addEventListener('input', calculate);
+  [flightA, flightB, packageStatusEl, flightAStatusEl, flightBStatusEl].forEach(input => {
+    if (input) {
+      input.addEventListener('input', calculate);
+      input.addEventListener('change', calculate);
+    }
   });
 
   calculate();

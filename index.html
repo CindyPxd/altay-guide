@@ -1150,25 +1150,44 @@
 
       <div class="budget-box">
         <div class="budget-inputs">
+          <!-- Fixed Base Items with Status -->
           <div class="input-group">
             <label>包价定制团总价 (固定费用含车/门票/5晚住宿)</label>
-            <input type="text" class="custom-input" value="¥17,200 (单人包价 ¥8,600)" readonly style="font-weight: 700; color: var(--primary-gold-dark);">
+            <div class="input-with-status">
+              <input type="text" class="custom-input" value="¥17,200 (单人包价 ¥8,600)" readonly style="font-weight: 700; color: var(--primary-gold-dark);">
+              <select id="package-status" class="custom-select status-select">
+                <option value="settled" selected>✅ 已结清</option>
+                <option value="pending">⏳ 待结清</option>
+              </select>
+            </div>
           </div>
 
           <div class="input-row">
             <div class="input-group">
               <label>假假往返机票实际费用 (元)</label>
-              <input type="number" id="flight-duan" class="custom-input" value="3800">
+              <div class="input-with-status">
+                <input type="number" id="flight-duan" class="custom-input" value="3800">
+                <select id="flight-duan-status" class="custom-select status-select">
+                  <option value="settled" selected>✅ 已结清</option>
+                  <option value="pending">⏳ 待结清</option>
+                </select>
+              </div>
             </div>
             <div class="input-group">
               <label>Cindy 往返机票实际费用 (元)</label>
-              <input type="number" id="flight-pan" class="custom-input" value="3400">
+              <div class="input-with-status">
+                <input type="number" id="flight-pan" class="custom-input" value="3400">
+                <select id="flight-pan-status" class="custom-select status-select">
+                  <option value="settled" selected>✅ 已结清</option>
+                  <option value="pending">⏳ 待结清</option>
+                </select>
+              </div>
             </div>
           </div>
 
           <!-- Dynamic AA Items Adder (新增消费项目) -->
           <div class="dynamic-items-header">
-            <h4>🧾 随程实际新增消费明细 (支持AA/个人分摊)</h4>
+            <h4>🧾 随程实际新增消费明细 (支持AA/个人分摊/状态)</h4>
             <button id="add-custom-item" class="add-item-btn">➕ 新增消费项目</button>
           </div>
 
@@ -1180,34 +1199,59 @@
         <div class="budget-summary">
           <div class="summary-title">📊 双方费用真实结算与 AA 汇总</div>
           
-          <div class="summary-row">
-            <span>旅行社合同包价：</span>
-            <span id="sum-package">¥17,200</span>
-          </div>
-          <div class="summary-row">
-            <span>双方机票合计：</span>
-            <span id="sum-flights">¥7,200</span>
-          </div>
-          <div class="summary-row">
-            <span>随程新增消费累计：</span>
-            <span id="sum-added-items" style="color: var(--primary-gold-dark); font-weight: 700;">¥500</span>
+          <!-- Category 1: 已结清费用 -->
+          <div class="status-summary-block settled-block">
+            <div class="block-title">✅ 已结清费用小计 (Settled)</div>
+            <div class="summary-row">
+              <span>假假 已结清：</span>
+              <span id="settled-duan-val" class="amount-val">¥12,400</span>
+            </div>
+            <div class="summary-row">
+              <span>Cindy 已结清：</span>
+              <span id="settled-pan-val" class="amount-val">¥12,000</span>
+            </div>
+            <div class="block-subtotal">
+              <span>已结清总计：</span>
+              <span id="settled-total-val" style="color: var(--primary-green-dark);">¥24,400</span>
+            </div>
           </div>
 
+          <!-- Category 2: 待结清费用 -->
+          <div class="status-summary-block pending-block">
+            <div class="block-title">⏳ 待结清费用小计 (Pending)</div>
+            <div class="summary-row">
+              <span>假假 待结清：</span>
+              <span id="pending-duan-val" class="amount-val">¥250</span>
+            </div>
+            <div class="summary-row">
+              <span>Cindy 待结清：</span>
+              <span id="pending-pan-val" class="amount-val">¥250</span>
+            </div>
+            <div class="block-subtotal">
+              <span>待结清总计：</span>
+              <span id="pending-total-val" style="color: var(--primary-gold-dark);">¥500</span>
+            </div>
+          </div>
+
+          <!-- Category 3: 每个人累计总计 (Grand Total per Person) -->
           <div class="summary-total">
+            <div class="grand-total-title">🏆 每个人累计总额 (Grand Total)</div>
             <div class="total-split-grid">
               <div class="split-person-card">
-                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; display: flex; align-items: center; gap: 0.25rem;"><img src="assets/nono-avatar.png" alt="假假" class="avatar-sm"> 假假 结算应付</div>
-                <div id="sum-duan-total" class="total-price" style="font-size: 1.25rem;">¥12,650</div>
+                <div class="person-card-header"><img src="assets/nono-avatar.png" alt="假假" class="avatar-sm"> 假假 个人累计</div>
+                <div id="sum-duan-total" class="total-price">¥12,650</div>
+                <div class="person-detail-badge" id="duan-breakdown-text">已结 ¥12,400 + 待结 ¥250</div>
               </div>
               <div class="split-person-card" style="text-align: right;">
-                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; display: flex; align-items: center; justify-content: flex-end; gap: 0.25rem;"><img src="assets/coco-avatar.png" alt="Cindy" class="avatar-sm"> Cindy 结算应付</div>
-                <div id="sum-pan-total" class="total-price" style="color: var(--primary-green-dark); font-size: 1.25rem;">¥12,250</div>
+                <div class="person-card-header" style="justify-content: flex-end;"><img src="assets/coco-avatar.png" alt="Cindy" class="avatar-sm"> Cindy 个人累计</div>
+                <div id="sum-pan-total" class="total-price" style="color: var(--primary-green-dark);">¥12,250</div>
+                <div class="person-detail-badge" id="pan-breakdown-text">已结 ¥12,000 + 待结 ¥250</div>
               </div>
             </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color);">
-              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">全行程实际结算总额：</span>
-              <span id="total-price-val" style="font-size: 1.25rem; font-weight: 800; color: var(--primary-gold-dark);">¥24,900</span>
+            <div class="grand-overall-row">
+              <span>全行程双人累计总支出：</span>
+              <span id="total-price-val">¥24,900</span>
             </div>
           </div>
         </div>
