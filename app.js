@@ -435,26 +435,62 @@ function initCopyButtons() {
   });
 }
 
-/* 10. Navigation Scroll Highlight */
+/* 10. Navigation Click & Scroll Highlight */
 function initNavScroll() {
   const sections = document.querySelectorAll('.section-block');
   const navLinks = document.querySelectorAll('.nav-links a');
 
+  // Smooth scroll handler on nav item clicks
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        const headerEl = document.querySelector('.site-header');
+        const headerHeight = headerEl ? headerEl.offsetHeight : 90;
+        const targetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - headerHeight - 15;
+
+        window.scrollTo({
+          top: Math.max(0, targetTop),
+          behavior: 'smooth'
+        });
+
+        // Update active class immediately on click
+        navLinks.forEach(item => item.classList.remove('active'));
+        link.classList.add('active');
+
+        // Scroll active item into view horizontally in nav-links container
+        const container = document.getElementById('site-nav');
+        if (container && container.scrollWidth > container.clientWidth) {
+          const itemLeft = link.offsetLeft - container.offsetLeft - (container.clientWidth / 2) + (link.clientWidth / 2);
+          container.scrollTo({ left: itemLeft, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  // Scroll observer to update active tab
   window.addEventListener('scroll', () => {
     let current = '';
+    const scrollPos = window.scrollY + 140;
+
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120;
-      if (window.scrollY >= sectionTop) {
+      if (scrollPos >= section.offsetTop) {
         current = section.getAttribute('id');
       }
     });
 
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
-    });
+    if (current) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    }
   });
 }
 

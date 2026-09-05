@@ -301,10 +301,11 @@ body.portrait-mode-active .weather-grid {
 .portrait-exit-bar {
   display: none;
   position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
+  top: 0.75rem;
+  right: 1.5rem;
+  left: auto;
+  transform: none;
+  z-index: 9999;
   background: var(--primary-gold-dark);
   color: #fff;
   font-size: 0.85rem;
@@ -313,6 +314,7 @@ body.portrait-mode-active .weather-grid {
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-lg);
   cursor: pointer;
+  pointer-events: auto;
 }
 
 body.portrait-mode-active .portrait-exit-bar {
