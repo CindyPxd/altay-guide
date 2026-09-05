@@ -70,11 +70,11 @@ function initPortraitToggle() {
 
     if (isActive) {
       toggleBtn.innerHTML = '<span>🖥️</span> 退出竖版';
-      showToast('📱 已开启手机竖版视图预览');
+      showToast('📱 已开启周可可手机竖版视图 🐬✨');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       toggleBtn.innerHTML = '<span>📱</span> 竖版预览';
-      showToast('🖥️ 已恢复宽屏视图');
+      showToast('🖥️ 已恢复宽屏全景视图 🎵');
     }
   }
 }

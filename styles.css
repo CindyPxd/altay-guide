@@ -1,28 +1,33 @@
 /* ==========================================================================
-   ALTAI 2026 AUTUMN TRIP - GOLDEN AUTUMN DESIGN SYSTEM
+   ALTAI 2026 AUTUMN TRIP - ZHOU KEKE (周深IP) DREAMY BLUE DESIGN SYSTEM
    ========================================================================== */
 
 :root {
-  /* Color Palette - Gold Autumn & Snow Mountain Theme */
-  --bg-main: #fcfbf9;
+  /* Color Palette - Zhou Keke (周深IP) Ocean Sky Blue & Starlight Purple Theme */
+  --bg-main: #f0f7ff; /* Gentle starlight cloud sky background */
   --bg-card: #ffffff;
-  --bg-card-subtle: #f6f4f0;
-  --bg-accent-light: #fef9c3;
+  --bg-card-subtle: #e8f4fc;
+  --bg-accent-light: #e0f2fe;
   
-  --text-primary: #1c1917;
-  --text-secondary: #57534e;
-  --text-muted: #78716c;
-  --text-light: #a8a29e;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
   
-  --primary-gold: #d97706;
-  --primary-gold-dark: #b45309;
-  --primary-gold-light: #fef3c7;
-  --primary-green: #15803d;
-  --primary-green-dark: #166534;
-  --primary-green-light: #dcfce7;
+  /* Zhou Keke Signature Blue & Ocean Gradient Tokens */
+  --primary-gold: #0284c7; /* Zhou Shen Deep Sky Blue */
+  --primary-gold-dark: #0369a1; /* Ocean Deep Blue */
+  --primary-gold-light: #e0f2fe; /* Light Starlight Blue */
 
-  --accent-sky: #0284c7;
-  --accent-sky-light: #e0f2fe;
+  --primary-green: #06b6d4; /* Dreamy Cyan */
+  --primary-green-dark: #0e7490;
+  --primary-green-light: #cffafe;
+
+  --accent-purple: #8b5cf6; /* Starlight Galaxy Purple */
+  --accent-purple-light: #f3e8ff;
+
+  --accent-sky: #38bdf8;
+  --accent-sky-light: #f0f9ff;
 
   --accent-orange: #ff6600; /* Dianping Orange */
   --accent-orange-light: #fff3eb;
@@ -30,16 +35,16 @@
   --accent-amap: #2563eb; /* Amap Blue */
   --accent-amap-light: #eff6ff;
 
-  --border-color: #e7e5e4;
-  --border-focus: #d97706;
+  --border-color: #cbd5e1;
+  --border-focus: #38bdf8;
 
-  --shadow-sm: 0 1px 3px rgba(28, 25, 23, 0.05);
-  --shadow-md: 0 4px 12px rgba(28, 25, 23, 0.08);
-  --shadow-lg: 0 12px 32px rgba(28, 25, 23, 0.12);
+  --shadow-sm: 0 2px 6px rgba(2, 132, 199, 0.08);
+  --shadow-md: 0 6px 18px rgba(2, 132, 199, 0.12);
+  --shadow-lg: 0 16px 36px rgba(2, 132, 199, 0.18);
 
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
   --radius-full: 9999px;
 
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
