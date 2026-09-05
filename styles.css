@@ -109,6 +109,13 @@ body {
   text-decoration: none;
 }
 
+.logo-mascot-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(2, 132, 199, 0.3));
+}
+
 .logo-title {
   font-size: 1.25rem;
   font-weight: 800;
@@ -338,7 +345,7 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .hero-banner {
-  background: linear-gradient(135deg, rgba(217, 119, 6, 0.08), rgba(21, 128, 61, 0.05)), var(--bg-card);
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.1), rgba(139, 92, 246, 0.06)), var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
@@ -351,8 +358,103 @@ body.portrait-mode-active .portrait-exit-bar {
   position: relative;
 }
 
+.hero-header-with-mascot {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero-mascot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.hero-mascot-img {
+  width: 105px;
+  height: 105px;
+  object-fit: contain;
+  animation: floatMascot 3.5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 16px rgba(2, 132, 199, 0.3));
+}
+
+.mascot-bubble {
+  background: linear-gradient(135deg, #0284c7, #38bdf8);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+  margin-top: 0.25rem;
+  position: relative;
+}
+
+.mascot-bubble::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent #0284c7 transparent;
+}
+
+@keyframes floatMascot {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+/* Floating Bottom-Right Companion Badge (周可可陪游中) */
+.zk-companion-badge {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  border: 2px solid var(--accent-sky);
+  padding: 0.35rem 0.85rem 0.35rem 0.4rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.25);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  animation: floatMascot 4s ease-in-out infinite;
+}
+
+.zk-companion-badge:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(2, 132, 199, 0.35);
+  border-color: var(--accent-purple);
+}
+
+.companion-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.companion-tooltip {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--primary-gold-dark);
+  white-space: nowrap;
+}
+
 .hero-content h1 {
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   font-weight: 800;
   line-height: 1.25;
   letter-spacing: -0.03em;
