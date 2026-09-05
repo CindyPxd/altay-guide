@@ -72,6 +72,40 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   transition: all var(--transition-normal);
+  position: relative;
+}
+
+/* Background Watermark System (Referencing coconono.world watermark style) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  background-image: url('assets/altay_logo.svg');
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  background-position: center;
+  opacity: 0.038;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -6%;
+  right: -4%;
+  width: 520px;
+  height: 520px;
+  pointer-events: none;
+  z-index: -1;
+  background-image: url('assets/altay_logo.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.045;
+  transform: rotate(-15deg);
 }
 
 /* Header & Navigation */
@@ -105,8 +139,20 @@ body {
 .logo-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   text-decoration: none;
+}
+
+.site-logo-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(217, 119, 6, 0.25));
+  transition: transform var(--transition-fast);
+}
+
+.logo-group:hover .site-logo-icon {
+  transform: rotate(8deg) scale(1.08);
 }
 
 
