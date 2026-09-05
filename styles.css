@@ -1,33 +1,33 @@
 /* ==========================================================================
-   ALTAI 2026 AUTUMN TRIP - ZHOU KEKE (周深IP) DREAMY BLUE DESIGN SYSTEM
+   ALTAI 2026 GOLDEN AUTUMN TRIP - DESIGN SYSTEM
    ========================================================================== */
 
 :root {
-  /* Color Palette - Zhou Keke (周深IP) Ocean Sky Blue & Starlight Purple Theme */
-  --bg-main: #f0f7ff; /* Gentle starlight cloud sky background */
+  /* Color Palette - Golden Autumn Altay Theme (Amber, Gold & Birch Green) */
+  --bg-main: #fcfbf9; /* Warm autumn linen background */
   --bg-card: #ffffff;
-  --bg-card-subtle: #e8f4fc;
-  --bg-accent-light: #e0f2fe;
+  --bg-card-subtle: #f6f4f0;
+  --bg-accent-light: #fef3c7;
   
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
   --text-muted: #64748b;
   --text-light: #94a3b8;
   
-  /* Zhou Keke Signature Blue & Ocean Gradient Tokens */
-  --primary-gold: #0284c7; /* Zhou Shen Deep Sky Blue */
-  --primary-gold-dark: #0369a1; /* Ocean Deep Blue */
-  --primary-gold-light: #e0f2fe; /* Light Starlight Blue */
+  /* Golden Autumn Altay Tokens */
+  --primary-gold: #d97706; /* Golden Autumn Amber */
+  --primary-gold-dark: #b45309; /* Deep Warm Gold */
+  --primary-gold-light: #fef3c7; /* Light Gold */
 
-  --primary-green: #06b6d4; /* Dreamy Cyan */
-  --primary-green-dark: #0e7490;
-  --primary-green-light: #cffafe;
+  --primary-green: #15803d; /* Birch Forest Green */
+  --primary-green-dark: #166534;
+  --primary-green-light: #dcfce7;
 
-  --accent-purple: #8b5cf6; /* Starlight Galaxy Purple */
+  --accent-purple: #7c3aed;
   --accent-purple-light: #f3e8ff;
 
-  --accent-sky: #38bdf8;
-  --accent-sky-light: #f0f9ff;
+  --accent-sky: #0284c7;
+  --accent-sky-light: #e0f2fe;
 
   --accent-orange: #ff6600; /* Dianping Orange */
   --accent-orange-light: #fff3eb;
@@ -35,12 +35,12 @@
   --accent-amap: #2563eb; /* Amap Blue */
   --accent-amap-light: #eff6ff;
 
-  --border-color: #cbd5e1;
-  --border-focus: #38bdf8;
+  --border-color: #e2e8f0;
+  --border-focus: #d97706;
 
-  --shadow-sm: 0 2px 6px rgba(2, 132, 199, 0.08);
-  --shadow-md: 0 6px 18px rgba(2, 132, 199, 0.12);
-  --shadow-lg: 0 16px 36px rgba(2, 132, 199, 0.18);
+  --shadow-sm: 0 2px 6px rgba(217, 119, 6, 0.08);
+  --shadow-md: 0 6px 18px rgba(217, 119, 6, 0.12);
+  --shadow-lg: 0 16px 36px rgba(217, 119, 6, 0.18);
 
   --radius-sm: 10px;
   --radius-md: 16px;
@@ -109,12 +109,6 @@ body {
   text-decoration: none;
 }
 
-.logo-mascot-img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(2, 132, 199, 0.3));
-}
 
 .logo-title {
   font-size: 1.25rem;
@@ -299,7 +293,7 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .hero-banner {
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.1), rgba(139, 92, 246, 0.06)), var(--bg-card);
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.08), rgba(21, 128, 61, 0.05)), var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
@@ -310,60 +304,6 @@ body.portrait-mode-active .portrait-exit-bar {
   align-items: center;
   overflow: hidden;
   position: relative;
-}
-
-.hero-header-with-mascot {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.hero-mascot-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.hero-mascot-img {
-  width: 105px;
-  height: 105px;
-  object-fit: contain;
-  animation: floatMascot 3.5s ease-in-out infinite;
-  filter: drop-shadow(0 8px 16px rgba(2, 132, 199, 0.3));
-}
-
-.mascot-bubble {
-  background: linear-gradient(135deg, #0284c7, #38bdf8);
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  white-space: nowrap;
-  margin-top: 0.25rem;
-  position: relative;
-}
-
-.mascot-bubble::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 0 6px 6px 6px;
-  border-style: solid;
-@keyframes floatMascot {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(2deg);
-  }
 }
 
 .hero-content h1 {
