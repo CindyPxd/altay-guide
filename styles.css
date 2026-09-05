@@ -105,7 +105,7 @@ body::after {
   transition: all var(--transition-normal);
 }
 
-/* Card Watermark System: Complete Logo Watermark Aligned to Bottom-Right Corner of EVERY Card */
+/* Card Watermark & Window Pattern System: Every card uses the window background pattern + bottom-right watermark */
 .hero-banner,
 .countdown-card,
 .flight-card,
@@ -118,6 +118,18 @@ body::after {
 .contract-card {
   position: relative;
   overflow: hidden;
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.08);
 }
 
 .hero-banner::after,
@@ -354,12 +366,15 @@ body.portrait-mode-active .site-footer {
 }
 
 body.portrait-mode-active::after {
-  width: min(220px, 50vw);
-  height: min(220px, 50vw);
-  right: 0;
-  bottom: 0;
+  position: fixed;
+  width: 125px;
+  height: 125px;
+  right: max(12px, calc(50vw - 195px));
+  bottom: 2.5rem;
   opacity: 1;
   transform: none;
+  z-index: 9999;
+  filter: drop-shadow(0 4px 14px rgba(217, 119, 6, 0.35));
 }
 
 body.portrait-mode-active .hero-content h1 {
@@ -410,8 +425,7 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .hero-banner {
-  background: linear-gradient(135deg, rgba(217, 119, 6, 0.08), rgba(21, 128, 61, 0.05)), var(--bg-card);
-  border: 1px solid var(--border-color);
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
   box-shadow: var(--shadow-md);
@@ -708,8 +722,17 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .flight-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-md);
   padding: 1.75rem;
   box-shadow: var(--shadow-sm);
@@ -859,8 +882,17 @@ body.portrait-mode-active .portrait-exit-bar {
 
 /* Amap Section */
 .map-container-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -960,8 +992,17 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .weather-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-md);
   padding: 1.25rem;
   box-shadow: var(--shadow-sm);
@@ -1103,8 +1144,17 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .restaurant-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -1404,8 +1454,17 @@ body.portrait-mode-active .portrait-exit-bar {
 }
 
 .hotel-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -1487,8 +1546,17 @@ body.portrait-mode-active .portrait-exit-bar {
 
 /* Checklist Section */
 .checklist-container {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-md);
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -1566,8 +1634,17 @@ body.portrait-mode-active .portrait-exit-bar {
    ========================================================================== */
 
 .budget-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-md);
   padding: 2rem;
   box-shadow: var(--shadow-sm);
@@ -1764,8 +1841,17 @@ body.portrait-mode-active .custom-item-row .item-name {
 
 /* Contract & Emergency Section */
 .contract-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background-color: #fcedd2;
+  background-image: url('assets/bg_pattern.png'), repeating-linear-gradient(
+    90deg,
+    #fffdf7,
+    #fffdf7 35px,
+    #fef3c7 35px,
+    #fef3c7 70px
+  );
+  background-repeat: repeat;
+  background-size: 109px auto, 70px 100%;
+  border: 1.5px solid rgba(217, 119, 6, 0.25);
   border-radius: var(--radius-md);
   padding: 1.75rem;
   box-shadow: var(--shadow-sm);
