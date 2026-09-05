@@ -301,21 +301,19 @@ function initChecklist() {
   updateChecklistProgress();
 }
 
-/* 8. AA Budget Calculator (支持新增与双人累计) */
+/* 8. AA Budget Calculator (真实费用结算) */
 function initBudgetCalculator() {
   const packageTotal = 17200; // Package cost for 2 people
   const perPersonPackage = packageTotal / 2;
   
   const flightA = document.getElementById('flight-duan');
   const flightB = document.getElementById('flight-pan');
-  const extraCostInput = document.getElementById('extra-expenses');
 
   const addBtn = document.getElementById('add-custom-item');
   const itemsContainer = document.getElementById('custom-items-list');
 
   const sumPackageEl = document.getElementById('sum-package');
   const sumFlightsEl = document.getElementById('sum-flights');
-  const sumExtraEl = document.getElementById('sum-extra');
   const sumAddedItemsEl = document.getElementById('sum-added-items');
   
   const sumDuanTotalEl = document.getElementById('sum-duan-total');
@@ -324,7 +322,7 @@ function initBudgetCalculator() {
 
   if (!flightA) return;
 
-  // Default initial items
+  // Default initial actual items
   const initialItems = [
     { name: '额尔齐斯河冷水鱼晚宴', amount: 380, split: 'aa' },
     { name: '观鱼台登顶区间车', amount: 120, split: 'aa' }
@@ -375,10 +373,8 @@ function initBudgetCalculator() {
   function calculate() {
     const fA = parseFloat(flightA.value) || 0;
     const fB = parseFloat(flightB.value) || 0;
-    const extra = parseFloat(extraCostInput.value) || 0;
 
     const totalFlights = fA + fB;
-    const extraPerPerson = extra / 2;
 
     let addedItemsTotal = 0;
     let duanAddedShare = 0;
@@ -402,13 +398,12 @@ function initBudgetCalculator() {
       });
     }
 
-    const duanTotal = perPersonPackage + fA + extraPerPerson + duanAddedShare;
-    const panTotal = perPersonPackage + fB + extraPerPerson + panAddedShare;
+    const duanTotal = perPersonPackage + fA + duanAddedShare;
+    const panTotal = perPersonPackage + fB + panAddedShare;
     const grandTotal = duanTotal + panTotal;
 
     if (sumPackageEl) sumPackageEl.textContent = `¥${packageTotal.toLocaleString()}`;
     if (sumFlightsEl) sumFlightsEl.textContent = `¥${totalFlights.toLocaleString()} (假假:¥${fA} / Cindy:¥${fB})`;
-    if (sumExtraEl) sumExtraEl.textContent = `¥${extra.toLocaleString()}`;
     if (sumAddedItemsEl) sumAddedItemsEl.textContent = `¥${addedItemsTotal.toLocaleString()}`;
 
     if (sumDuanTotalEl) sumDuanTotalEl.textContent = `¥${Math.round(duanTotal).toLocaleString()}`;
@@ -416,7 +411,7 @@ function initBudgetCalculator() {
     if (totalPriceEl) totalPriceEl.textContent = `¥${Math.round(grandTotal).toLocaleString()}`;
   }
 
-  [flightA, flightB, extraCostInput].forEach(input => {
+  [flightA, flightB].forEach(input => {
     if (input) input.addEventListener('input', calculate);
   });
 

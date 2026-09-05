@@ -995,7 +995,7 @@
       <div class="section-header">
         <div class="section-title-group">
           <span class="section-subtitle">Cost Splitter</span>
-          <h2 class="section-title">💰 费用预算与双人 AA 计算器</h2>
+          <h2 class="section-title">💰 费用真实结算与双人 AA 计算器</h2>
         </div>
       </div>
 
@@ -1008,23 +1008,18 @@
 
           <div class="input-row">
             <div class="input-group">
-              <label>假假往返机票预算 (元)</label>
+              <label>假假往返机票实际费用 (元)</label>
               <input type="number" id="flight-duan" class="custom-input" value="3800">
             </div>
             <div class="input-group">
-              <label>Cindy 往返机票预算 (元)</label>
+              <label>Cindy 往返机票实际费用 (元)</label>
               <input type="number" id="flight-pan" class="custom-input" value="3400">
             </div>
           </div>
 
-          <div class="input-group">
-            <label>预估正餐与零花通用预算 (元)</label>
-            <input type="number" id="extra-expenses" class="custom-input" value="2600">
-          </div>
-
           <!-- Dynamic AA Items Adder (新增消费项目) -->
           <div class="dynamic-items-header">
-            <h4>🧾 随程新增消费明细 (支持AA/个人分摊)</h4>
+            <h4>🧾 随程实际新增消费明细 (支持AA/个人分摊)</h4>
             <button id="add-custom-item" class="add-item-btn">➕ 新增消费项目</button>
           </div>
 
@@ -1034,7 +1029,7 @@
         </div>
 
         <div class="budget-summary">
-          <div class="summary-title">📊 双人累计预算与 AA 结算汇总</div>
+          <div class="summary-title">📊 双方费用真实结算与 AA 汇总</div>
           
           <div class="summary-row">
             <span>旅行社合同包价：</span>
@@ -1045,29 +1040,25 @@
             <span id="sum-flights">¥7,200</span>
           </div>
           <div class="summary-row">
-            <span>通用餐费零花预估：</span>
-            <span id="sum-extra">¥2,600</span>
-          </div>
-          <div class="summary-row">
-            <span>随程新增项目累计：</span>
-            <span id="sum-added-items" style="color: var(--primary-gold-dark); font-weight: 700;">¥0</span>
+            <span>随程新增消费累计：</span>
+            <span id="sum-added-items" style="color: var(--primary-gold-dark); font-weight: 700;">¥500</span>
           </div>
 
           <div class="summary-total">
             <div class="total-split-grid">
               <div class="split-person-card">
-                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">👤 假假 累计应付</div>
-                <div id="sum-duan-total" class="total-price" style="font-size: 1.25rem;">¥13,700</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">👤 假假 结算应付</div>
+                <div id="sum-duan-total" class="total-price" style="font-size: 1.25rem;">¥12,650</div>
               </div>
               <div class="split-person-card" style="text-align: right;">
-                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">👤 Cindy 累计应付</div>
-                <div id="sum-pan-total" class="total-price" style="color: var(--primary-green-dark); font-size: 1.25rem;">¥13,300</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">👤 Cindy 结算应付</div>
+                <div id="sum-pan-total" class="total-price" style="color: var(--primary-green-dark); font-size: 1.25rem;">¥12,250</div>
               </div>
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color);">
-              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">全行程双人总支出累计：</span>
-              <span id="total-price-val" style="font-size: 1.25rem; font-weight: 800; color: var(--primary-gold-dark);">¥27,000</span>
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary);">全行程实际结算总额：</span>
+              <span id="total-price-val" style="font-size: 1.25rem; font-weight: 800; color: var(--primary-gold-dark);">¥24,900</span>
             </div>
           </div>
         </div>
