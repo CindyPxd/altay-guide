@@ -477,7 +477,19 @@ body.portrait-mode-active .portrait-exit-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
+}
+
+.countdown-title-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(217, 119, 6, 0.25));
+  transition: transform var(--transition-fast);
+}
+
+.countdown-card:hover .countdown-title-logo {
+  transform: rotate(8deg) scale(1.1);
 }
 
 .countdown-title .pulse-dot {
