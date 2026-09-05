@@ -357,9 +357,6 @@ body.portrait-mode-active .portrait-exit-bar {
   transform: translateX(-50%);
   border-width: 0 6px 6px 6px;
   border-style: solid;
-  border-color: transparent transparent #0284c7 transparent;
-}
-
 @keyframes floatMascot {
   0%, 100% {
     transform: translateY(0) rotate(0deg);
@@ -367,44 +364,6 @@ body.portrait-mode-active .portrait-exit-bar {
   50% {
     transform: translateY(-8px) rotate(2deg);
   }
-}
-
-/* Floating Bottom-Right Companion Badge (周可可陪游中) */
-.zk-companion-badge {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 900;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--bg-card);
-  border: 2px solid var(--accent-sky);
-  padding: 0.35rem 0.85rem 0.35rem 0.4rem;
-  border-radius: var(--radius-full);
-  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.25);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  animation: floatMascot 4s ease-in-out infinite;
-}
-
-.zk-companion-badge:hover {
-  transform: scale(1.08) translateY(-4px);
-  box-shadow: 0 12px 32px rgba(2, 132, 199, 0.35);
-  border-color: var(--accent-purple);
-}
-
-.companion-img {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-}
-
-.companion-tooltip {
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: var(--primary-gold-dark);
-  white-space: nowrap;
 }
 
 .hero-content h1 {
