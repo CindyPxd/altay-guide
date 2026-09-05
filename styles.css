@@ -76,25 +76,26 @@ body {
 }
 
 /* Background Watermark System (Single Enlarged coconono.world logo watermark - clean, crisp & subtle) */
+/* Page Window Watermark (Completely Opaque, Aligned to Bottom-Right Corner of Window) */
 body::after {
   content: '';
   position: fixed;
-  bottom: -6%;
-  right: -4%;
-  width: min(680px, 50vw);
-  height: min(680px, 50vw);
+  bottom: 16px;
+  right: 16px;
+  width: min(150px, 24vw);
+  height: min(150px, 24vw);
   pointer-events: none;
-  z-index: -1;
+  z-index: 999;
   background-image: url('assets/coco-nono-pair.webp');
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center right;
-  opacity: 0.028; /* Low opacity for pristine text clarity */
-  transform: rotate(-8deg);
+  background-position: bottom right;
+  opacity: 1; /* Completely opaque page watermark */
+  filter: drop-shadow(0 4px 14px rgba(217, 119, 6, 0.25));
   transition: all var(--transition-normal);
 }
 
-/* Card Watermark System: Enlarged subtle logo watermark under EVERY card */
+/* Card Watermark System: Complete Logo Watermark Aligned to Bottom-Right Corner of EVERY Card */
 .hero-banner,
 .countdown-card,
 .flight-card,
@@ -121,18 +122,17 @@ body::after {
 .contract-card::after {
   content: '';
   position: absolute;
-  bottom: -12%;
-  right: -6%;
-  width: min(280px, 50%);
-  height: min(280px, 50%);
+  bottom: 8px;
+  right: 8px;
+  width: min(140px, 32%);
+  height: min(140px, 32%);
   pointer-events: none;
   z-index: 0;
   background-image: url('assets/coco-nono-pair.webp');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom right;
-  opacity: 0.038;
-  transform: rotate(-10deg);
+  opacity: 0.08;
   transition: opacity var(--transition-normal), transform var(--transition-normal);
 }
 
@@ -344,12 +344,12 @@ body.portrait-mode-active .site-footer {
 }
 
 body.portrait-mode-active::after {
-  width: min(380px, 80vw);
-  height: min(380px, 80vw);
-  right: -10%;
-  bottom: -4%;
-  opacity: 0.026;
-  transform: rotate(-5deg);
+  width: 120px;
+  height: 120px;
+  right: 12px;
+  bottom: 12px;
+  opacity: 1;
+  transform: none;
 }
 
 body.portrait-mode-active .hero-content h1 {
