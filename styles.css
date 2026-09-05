@@ -94,6 +94,72 @@ body::after {
   transition: all var(--transition-normal);
 }
 
+/* Card Watermark System: Enlarged subtle logo watermark under EVERY card */
+.hero-banner,
+.countdown-card,
+.flight-card,
+.map-container-box,
+.day-card,
+.restaurant-card,
+.hotel-card,
+.checklist-card,
+.budget-box,
+.contract-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner::after,
+.countdown-card::after,
+.flight-card::after,
+.map-container-box::after,
+.day-card::after,
+.restaurant-card::after,
+.hotel-card::after,
+.checklist-card::after,
+.budget-box::after,
+.contract-card::after {
+  content: '';
+  position: absolute;
+  bottom: -12%;
+  right: -6%;
+  width: min(280px, 50%);
+  height: min(280px, 50%);
+  pointer-events: none;
+  z-index: 0;
+  background-image: url('assets/coco-nono-pair.webp');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom right;
+  opacity: 0.038;
+  transform: rotate(-10deg);
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.hero-banner > *,
+.countdown-card > *,
+.flight-card > *,
+.map-container-box > *,
+.day-card > *,
+.restaurant-card > *,
+.hotel-card > *,
+.checklist-card > *,
+.budget-box > *,
+.contract-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.flight-card:hover::after,
+.day-card:hover::after,
+.restaurant-card:hover::after,
+.hotel-card:hover::after,
+.budget-box:hover::after,
+.contract-card:hover::after {
+  opacity: 0.055;
+  transform: rotate(-6deg) scale(1.05);
+}
+
 /* Header & Navigation */
 .site-header {
   position: sticky;
