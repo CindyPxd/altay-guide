@@ -195,23 +195,30 @@ function initFoodFilter() {
 
   if (!filterBtns.length) return;
 
+  function applyFilter(filterCategory) {
+    foodCards.forEach(card => {
+      const cardLoc = card.getAttribute('data-category');
+      if (filterCategory === 'all' || cardLoc === filterCategory) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      const filterCategory = btn.getAttribute('data-filter');
-
-      foodCards.forEach(card => {
-        const cardLoc = card.getAttribute('data-category');
-        if (filterCategory === 'all' || cardLoc === filterCategory) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      applyFilter(btn.getAttribute('data-filter'));
     });
   });
+
+  // Apply filter for initial active button (e.g. altay)
+  const initialActive = document.querySelector('.food-filter-btn.active');
+  if (initialActive) {
+    applyFilter(initialActive.getAttribute('data-filter'));
+  }
 }
 
 /* 6. Daily Itinerary Collapsible Cards */
