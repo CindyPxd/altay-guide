@@ -14,6 +14,9 @@
 </head>
 <body>
 
+  <!-- Floating Exit Bar for Vertical Portrait Mode -->
+  <div id="portrait-exit-bar" class="portrait-exit-bar">✖ 退出竖版视图</div>
+
   <!-- Site Header -->
   <header class="site-header">
     <div class="header-container">
@@ -33,6 +36,12 @@
         <a href="#budget">预算 Budget</a>
         <a href="#contract">合同 Contract</a>
       </nav>
+
+      <div class="header-actions">
+        <button id="portrait-toggle" class="portrait-toggle-btn" title="切换手机竖版视图预览">
+          <span>📱</span> 竖版预览
+        </button>
+      </div>
     </div>
   </header>
 
@@ -243,7 +252,7 @@
       </div>
     </section>
 
-    <!-- NEW MODULE: Amap Section -->
+    <!-- Amap Section -->
     <section id="map" class="section-block">
       <div class="section-header">
         <div class="section-title-group">

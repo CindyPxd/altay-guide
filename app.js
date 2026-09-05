@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
+  initPortraitToggle();
   initAmapModule();
   initWeatherModule();
   initFoodFilter();
@@ -52,7 +53,32 @@ function initCountdown() {
   setInterval(updateTimer, 1000);
 }
 
-/* 2. Amap Module (高德地图) */
+/* 2. Mobile Vertical Portrait Mode Preview Switcher (📱 竖版预览) */
+function initPortraitToggle() {
+  const toggleBtn = document.getElementById('portrait-toggle');
+  const exitBar = document.getElementById('portrait-exit-bar');
+
+  if (!toggleBtn) return;
+
+  toggleBtn.addEventListener('click', togglePortrait);
+  if (exitBar) exitBar.addEventListener('click', togglePortrait);
+
+  function togglePortrait() {
+    const isActive = document.body.classList.toggle('portrait-mode-active');
+    toggleBtn.classList.toggle('active', isActive);
+
+    if (isActive) {
+      toggleBtn.innerHTML = '<span>🖥️</span> 退出竖版';
+      showToast('📱 已开启手机竖版视图预览');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      toggleBtn.innerHTML = '<span>📱</span> 竖版预览';
+      showToast('🖥️ 已恢复宽屏视图');
+    }
+  }
+}
+
+/* 3. Amap Module (高德地图) */
 function initAmapModule() {
   const container = document.getElementById('amap-render-container');
   if (!container) return;
@@ -143,7 +169,7 @@ function initAmapModule() {
   }
 }
 
-/* 3. Real-Time Weather Module */
+/* 4. Real-Time Weather Module */
 function initWeatherModule() {
   const refreshBtn = document.getElementById('refresh-weather');
   if (!refreshBtn) return;
@@ -160,7 +186,7 @@ function initWeatherModule() {
   });
 }
 
-/* 4. Dianping Gourmet Category Filter */
+/* 5. Dianping Gourmet Category Filter */
 function initFoodFilter() {
   const filterBtns = document.querySelectorAll('.food-filter-btn');
   const foodCards = document.querySelectorAll('.restaurant-card');
@@ -186,7 +212,7 @@ function initFoodFilter() {
   });
 }
 
-/* 5. Daily Itinerary Collapsible Cards */
+/* 6. Daily Itinerary Collapsible Cards */
 function initDayCards() {
   const dayHeaders = document.querySelectorAll('.day-header');
   dayHeaders.forEach(header => {
@@ -197,7 +223,7 @@ function initDayCards() {
   });
 }
 
-/* 6. Interactive Packing Checklist with LocalStorage */
+/* 7. Interactive Packing Checklist with LocalStorage */
 function initChecklist() {
   const checkItems = document.querySelectorAll('.check-item');
   const progressFill = document.querySelector('.progress-fill');
@@ -247,7 +273,7 @@ function initChecklist() {
   updateChecklistProgress();
 }
 
-/* 7. AA Budget Calculator */
+/* 8. AA Budget Calculator */
 function initBudgetCalculator() {
   const packageTotal = 17200; // Package cost for 2 people
   
@@ -288,7 +314,7 @@ function initBudgetCalculator() {
   calculate();
 }
 
-/* 8. One-Click Copy Button */
+/* 9. One-Click Copy Button */
 function initCopyButtons() {
   const copyBtns = document.querySelectorAll('.copy-btn');
   copyBtns.forEach(btn => {
@@ -305,7 +331,7 @@ function initCopyButtons() {
   });
 }
 
-/* 9. Navigation Scroll Highlight */
+/* 10. Navigation Scroll Highlight */
 function initNavScroll() {
   const sections = document.querySelectorAll('.section-block');
   const navLinks = document.querySelectorAll('.nav-links a');
