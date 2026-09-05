@@ -5,7 +5,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
   initPortraitToggle();
-  initMobileMenu();
   initAmapModule();
   initWeatherModule();
   initFoodFilter();
@@ -79,32 +78,7 @@ function initPortraitToggle() {
   }
 }
 
-/* Mobile Menu Toggle & Dropdown Handler (☰ 菜单栏) */
-function initMobileMenu() {
-  const menuToggle = document.getElementById('mobile-menu-toggle');
-  const siteNav = document.getElementById('site-nav');
-  const navItems = document.querySelectorAll('.nav-item');
 
-  if (!menuToggle || !siteNav) return;
-
-  menuToggle.addEventListener('click', () => {
-    const isExpanded = siteNav.classList.toggle('expanded');
-    menuToggle.classList.toggle('active', isExpanded);
-    menuToggle.innerHTML = isExpanded 
-      ? '<span>✖</span> <span class="btn-text">收起</span>' 
-      : '<span>☰</span> <span class="btn-text">菜单栏</span>';
-  });
-
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      if (siteNav.classList.contains('expanded')) {
-        siteNav.classList.remove('expanded');
-        menuToggle.classList.remove('active');
-        menuToggle.innerHTML = '<span>☰</span> <span class="btn-text">菜单栏</span>';
-      }
-    });
-  });
-}
 
 /* 3. Amap Module (高德地图) */
 function initAmapModule() {
@@ -439,26 +413,24 @@ function initCopyButtons() {
 function initNavScroll() {
   const sections = document.querySelectorAll('.section-block');
   const navLinks = document.querySelectorAll('.nav-links a');
+  let isNavClicking = false;
+  let scrollTimeout = null;
 
   // Smooth scroll handler on nav item clicks
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
+
       const targetId = link.getAttribute('href');
       if (!targetId || targetId === '#') return;
 
       const targetEl = document.querySelector(targetId);
       if (targetEl) {
-        const headerEl = document.querySelector('.site-header');
-        const headerHeight = headerEl ? headerEl.offsetHeight : 90;
-        const targetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - headerHeight - 15;
+        isNavClicking = true;
+        if (scrollTimeout) clearTimeout(scrollTimeout);
 
-        window.scrollTo({
-          top: Math.max(0, targetTop),
-          behavior: 'smooth'
-        });
-
-        // Update active class immediately on click
+        // Update active class immediately on click ONLY for this link
         navLinks.forEach(item => item.classList.remove('active'));
         link.classList.add('active');
 
@@ -466,14 +438,30 @@ function initNavScroll() {
         const container = document.getElementById('site-nav');
         if (container && container.scrollWidth > container.clientWidth) {
           const itemLeft = link.offsetLeft - container.offsetLeft - (container.clientWidth / 2) + (link.clientWidth / 2);
-          container.scrollTo({ left: itemLeft, behavior: 'smooth' });
+          container.scrollTo({ left: Math.max(0, itemLeft), behavior: 'smooth' });
         }
+
+        const headerEl = document.querySelector('.site-header');
+        const headerHeight = headerEl ? headerEl.offsetHeight : 85;
+        const targetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - headerHeight - 15;
+
+        window.scrollTo({
+          top: Math.max(0, targetTop),
+          behavior: 'smooth'
+        });
+
+        // Reset flag after smooth scroll completes
+        scrollTimeout = setTimeout(() => {
+          isNavClicking = false;
+        }, 850);
       }
     });
   });
 
-  // Scroll observer to update active tab
+  // Scroll observer to update active tab on manual scroll
   window.addEventListener('scroll', () => {
+    if (isNavClicking) return; // Ignore scroll updates during click-triggered smooth scrolling
+
     let current = '';
     const scrollPos = window.scrollY + 140;
 

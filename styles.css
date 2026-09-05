@@ -138,28 +138,6 @@ body {
   gap: 0.5rem;
 }
 
-.mobile-menu-btn {
-  background: var(--bg-card-subtle);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  transition: all var(--transition-fast);
-}
-
-.mobile-menu-btn:hover,
-.mobile-menu-btn.active {
-  background: var(--primary-gold-light);
-  border-color: var(--primary-gold);
-  color: var(--primary-gold-dark);
-}
-
 .portrait-toggle-btn {
   background: var(--primary-gold-light);
   color: var(--primary-gold-dark);
@@ -206,6 +184,7 @@ body {
   font-size: 0.82rem;
   font-weight: 600;
   padding: 0.35rem 0.75rem;
+  margin: 0 0.1rem;
   border-radius: var(--radius-full);
   background: var(--bg-card-subtle);
   border: 1px solid var(--border-color);
@@ -214,6 +193,7 @@ body {
   align-items: center;
   gap: 0.3rem;
   white-space: nowrap;
+  user-select: none;
 }
 
 .nav-item:hover,
@@ -222,33 +202,7 @@ body {
   background: var(--primary-gold) !important;
   border-color: var(--primary-gold) !important;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.35);
-}
-
-/* Dropdown Grid Menu when Mobile Menu Toggle is expanded */
-.nav-links.expanded {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
-  gap: 0.5rem !important;
-  padding: 0.75rem 0 !important;
-  animation: slideDown 0.25s ease-out;
-}
-
-.nav-links.expanded .nav-item {
-  justify-content: center;
-  padding: 0.6rem 0.5rem;
-  font-size: 0.85rem;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
 }
 
 /* Vertical Mobile Portrait Mode Preview (📱 竖版视图) */
