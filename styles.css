@@ -1366,6 +1366,85 @@ body.portrait-mode-active .portrait-exit-bar {
   display: none;
 }
 
+/* Daily Route Blueprint Diagram (每日行程路线图) */
+.day-route-diagram {
+  background: linear-gradient(135deg, #fffcf5, #fef3c7);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.06);
+}
+
+.route-diagram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.route-diagram-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--primary-gold-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.route-distance-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #ffffff;
+  color: var(--primary-gold-dark);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-full);
+}
+
+.route-nodes-flow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
+}
+
+.route-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.route-node.start {
+  border-color: var(--primary-green);
+  background: var(--primary-green-light);
+  color: var(--primary-green-dark);
+}
+
+.route-node.end {
+  border-color: var(--primary-gold);
+  background: var(--primary-gold-light);
+  color: var(--primary-gold-dark);
+}
+
+.route-connector {
+  color: var(--primary-gold);
+  font-weight: 800;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
 .timeline {
   display: flex;
   flex-direction: column;
