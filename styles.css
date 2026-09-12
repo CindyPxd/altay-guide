@@ -1629,6 +1629,108 @@ body.portrait-mode-active .portrait-exit-bar {
   list-style-position: inside;
 }
 
+/* Outfit Recommendation Card Styles */
+.outfit-sidebar-box {
+  background: linear-gradient(135deg, rgba(255, 251, 245, 0.95), rgba(248, 241, 230, 0.95));
+  border: 1px solid rgba(217, 119, 6, 0.28);
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .outfit-sidebar-box {
+  background: linear-gradient(135deg, rgba(30, 27, 24, 0.95), rgba(42, 36, 30, 0.95));
+  border: 1px solid rgba(217, 119, 6, 0.38);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.outfit-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed rgba(217, 119, 6, 0.25);
+}
+
+.outfit-header h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #b45309;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+[data-theme="dark"] .outfit-header h4 {
+  color: #f59e0b;
+}
+
+.outfit-color-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.color-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  letter-spacing: 0.02em;
+}
+
+.outfit-info-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.outfit-info-list li {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.outfit-info-list li strong {
+  color: var(--text-primary);
+}
+
+.outfit-avoid {
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 3px solid #ef4444;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  color: #dc2626 !important;
+  margin-top: 0.2rem;
+  font-size: 0.75rem !important;
+}
+
+[data-theme="dark"] .outfit-avoid {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5 !important;
+}
+
+.outfit-general-tip {
+  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px dotted var(--border-color);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
 .scenic-img-container {
   border-radius: var(--radius-sm);
   overflow: hidden;
