@@ -184,7 +184,7 @@ function initWeatherModule() {
     setTimeout(() => {
       refreshBtn.disabled = false;
       refreshBtn.innerHTML = '🔄 刷新最新气象';
-      showToast('☁️ 已刷新阿勒泰·禾木·喀纳斯最新实时气象数据！');
+      showToast('☁️ 已同步更新 2026年9月25日 - 9月30日 真实出行日期当地气象预测！');
     }, 800);
   });
 }

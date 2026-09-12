@@ -1015,6 +1015,109 @@ body.portrait-mode-active .portrait-exit-bar {
   background: #1d4ed8;
 }
 
+/* Trip Date Aligned Weather Forecast (真实出行日期逐日天气) */
+.trip-weather-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.trip-weather-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.trip-weather-header h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--primary-gold-dark);
+}
+
+.forecast-note-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--primary-gold-light);
+  color: var(--primary-gold-dark);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+.trip-weather-days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.85rem;
+}
+
+.trip-day-weather-card {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+}
+
+.trip-day-weather-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--primary-gold);
+  box-shadow: var(--shadow-sm);
+}
+
+.trip-date-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.day-lbl {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--primary-gold-dark);
+}
+
+.location-lbl {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.weather-icon-temp {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.w-icon {
+  font-size: 1.5rem;
+}
+
+.w-temp {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.w-condition {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.w-detail {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
 /* Weather Module */
 .weather-grid {
   display: grid;
