@@ -1469,83 +1469,80 @@ body.portrait-mode-active .portrait-exit-bar {
   display: none;
 }
 
-/* Daily Route Blueprint Diagram (每日行程路线图) */
-.day-route-diagram {
-  background: linear-gradient(135deg, #fffcf5, #fef3c7);
-  border: 1px solid rgba(217, 119, 6, 0.25);
+/* Proportional SVG Route Map Sidebar Box (等比例路线地图) */
+.route-map-sidebar-box {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: 0.85rem 1rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.06);
+  padding: 0.75rem 0.85rem;
+  overflow: hidden;
 }
 
-.route-diagram-header {
+.route-map-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.5rem;
 }
 
-.route-diagram-title {
+.route-map-header h4 {
   font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--primary-gold-dark);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
   display: flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-.route-distance-pill {
-  font-size: 0.75rem;
+.route-map-badge {
+  font-size: 0.72rem;
   font-weight: 700;
-  background: #ffffff;
+  background: rgba(217, 119, 6, 0.12);
   color: var(--primary-gold-dark);
   border: 1px solid rgba(217, 119, 6, 0.3);
   padding: 0.15rem 0.55rem;
-  border-radius: var(--radius-full);
+  border-radius: 12px;
 }
 
-.route-nodes-flow {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  overflow-x: auto;
-  padding-bottom: 0.25rem;
-  scrollbar-width: thin;
+[data-theme="dark"] .route-map-badge {
+  background: rgba(245, 158, 11, 0.18);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.4);
 }
 
-.route-node {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  padding: 0.3rem 0.6rem;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+.route-svg-container {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(217, 119, 6, 0.2);
 }
 
-.route-node.start {
-  border-color: var(--primary-green);
-  background: var(--primary-green-light);
-  color: var(--primary-green-dark);
+.route-svg-canvas {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 300 / 160;
+  background: linear-gradient(135deg, #162026 0%, #0d151a 100%);
+  display: block;
 }
 
-.route-node.end {
-  border-color: var(--primary-gold);
-  background: var(--primary-gold-light);
-  color: var(--primary-gold-dark);
+[data-theme="light"] .route-svg-canvas {
+  background: linear-gradient(135deg, #f0f7f4 0%, #e1ebe5 100%);
 }
 
-.route-connector {
-  color: var(--primary-gold);
-  font-weight: 800;
-  font-size: 0.85rem;
-  flex-shrink: 0;
+.animated-route-dash {
+  stroke-dasharray: 6;
+  animation: routeDashMove 2s linear infinite;
+}
+
+@keyframes routeDashMove {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .timeline {
